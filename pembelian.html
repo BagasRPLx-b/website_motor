@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jual Beli Motor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .body-form{
+        height: 125vh;
+    
+    }
+
+    .konten{
+        height: 100vh;
+        background-size: cover;
+        background-image: url(https://wallpapercave.com/wp/pkD0PU4.jpg);
+    }
+    
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        margin-top: 20vh;
+        box-shadow: 8px 12px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 8px 12px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 8px 12px 5px 0px rgba(0,0,0,0.75);
+    }
+    .form-container h2 {
+        text-align: center;
+    }
+    .form-container label {
+        font-weight: bold;
+    }
+    .form-container input, .form-container select {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-container button:hover {
+        background-color: #45a049;
+    }
+    .total-price {
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>
+<body class="body-form">
+    <div class="navbar">
+        <div class="logo">ADT STORE</div>
+        <div>
+          <ul class="ul-navbar">
+            <li class="li-navbar"><a href="home.html">HOME</a></li>
+            <li class="li-navbar"><a href="toko.html">TOKO</a></li>
+            <li class="li-navbar"><a href="about.us.html">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+</head>
+<body>
+<div class="konten"> <div class="form-container">
+    <h2>Form Pembelian</h2>
+    <form id="purchaseForm">
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Masukan Nomor Hp mu</label>
+        <input type="number" id="number" name="number" required>
+
+        <label for="product">Produk Apa Yang Ingin Anda Beli?</label>
+        <select id="product" name="product" required>
+            <option value="CBR150R">Honda - CBR150R - Rp 38.500.000</option>
+            <option value="CBR250RR">Honda - CBR250RR - Rp 64.800.000</option>
+            <option value="CB150R">Honda - CB150R - Rp 31.700.000</option>
+            <option value="XSR155">Yamaha - XSR155 - Rp 38.300.000</option>
+            <option value="R15">Yamaha - R15- Rp 40.300.000</option>
+            <option value="R25">Yamaha - R25 - Rp 63.900.000</option>
+            <option value="MT25">yamaha - MT25 - Rp 57.700.000 </option>
+            <option value="MT15">Yamaha - MT15 - Rp 38.900.000</option>
+            <option value="VIXION155">Yamaha - VIXION155 - Rp 29.600.000</option>
+            <option value="GSXR150">Suzuki - GSXR150 - Rp 35.300.000</option>
+            <option value="GIXXER250">Suzuki - GIXXER250 - Rp 56.200.000</option>
+            <option value="GSXS150">Suzuki - GSXS150 - Rp 31.900.000</option>
+           
+        </select>
+
+        <label for="quantity">Berapa Jumlah nya</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+        <p class="total-price" id="totalPrice">Total Harga: Rp 100.000</p>
+
+        <button type="submit">Proses Pembelian</button>
+    </form>
+</div>
+</div>
+   
+    <footer>
+        <p>&copy; 2024 ADT STORE. Semua Hak Dilindungi.</p>
+        <p>
+            Toko ADT STORE adalah toko yang terpecaya 100% aman <br />
+            banyak juga promo-promo menarik nya <br> dan saya ucapkan juga terimakasih Bagi yang sudah berkunjung Ke Toko saya
+          </p>
+    </footer>
+
+    <script>
+        // Data harga produk
+        const prices = {
+            CBR150R: 38500000,
+            CBR250RR: 64800000,
+            CB150R: 31700000,
+            XSR155: 38300000,
+            R15: 40300000,
+            R25: 63900000,
+            MT25: 57000000,
+            MT15: 38900000,
+            VIXION155: 29600000,
+            GSXR150: 35300000,
+            GISSER250: 56200000,
+            GSXS150: 31900000,
+        };
+
+        // Menghitung total harga
+        function calculateTotal() {
+            const productSelect = document.getElementById('product');
+            const quantityInput = document.getElementById('quantity');
+            const totalPriceElement = document.getElementById('totalPrice');
+
+            const selectedProduct = productSelect.value;
+            const quantity = parseInt(quantityInput.value, 10);
+            const price = prices[selectedProduct];
+            const totalPrice = price * quantity;
+
+            totalPriceElement.textContent = `Total Harga: Rp ${totalPrice.toLocaleString()}`;
+        }
+
+        // Event listener untuk mengupdate harga saat produk atau kuantitas berubah
+        document.getElementById('product').addEventListener('change', calculateTotal);
+        document.getElementById('quantity').addEventListener('input', calculateTotal);
+
+        // Form submit handler
+        document.getElementById('purchaseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('number').value;
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+
+            alert(`Terima kasih, ${name}!\n\nPembelian Produk ${product} sebanyak ${quantity} berhasil diproses.\n\nTotal Harga: Rp ${prices[product] * quantity}`);
+        });
+
+        // Inisialisasi harga total ketika halaman pertama kali dimuat
+        calculateTotal();
+    </script>
+</body>
+</html>
